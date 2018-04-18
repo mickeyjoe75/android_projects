@@ -1,0 +1,26 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mjm75.kidscalculator">
+
+    <application>
+
+        <meta-data
+            android:name="com.google.android.gms.car.application"
+            android:resource="@xml/automotive_app_desc" />
+
+        <service android:name="com.example.mjm75.kidscalculator.MyMessagingService"></service>
+
+        <receiver android:name="com.example.mjm75.kidscalculator.MessageReadReceiver">
+            <intent-filter>
+                <action android:name="com.example.mjm75.kidscalculator.ACTION_MESSAGE_READ" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.example.mjm75.kidscalculator.MessageReplyReceiver">
+            <intent-filter>
+                <action android:name="com.example.mjm75.kidscalculator.ACTION_MESSAGE_REPLY" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>
