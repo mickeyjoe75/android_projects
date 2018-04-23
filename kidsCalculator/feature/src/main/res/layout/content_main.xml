@@ -50,10 +50,11 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="236dp"
-        android:layout_height="84dp"
+        android:layout_height="83dp"
         android:text="Result"
         android:textSize="48sp"
+        tools:background="@android:color/darker_gray"
         tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="283dp" />
+        tools:layout_editor_absoluteY="284dp" />
 
 </android.support.constraint.ConstraintLayout>
