@@ -53,7 +53,7 @@ public class WordCounterMainActivity extends AppCompatActivity {
         String words = questionEditText.getText().toString();
         WordCounter wordCounter = new WordCounter(words);
         int  wordCount = wordCounter.getWordCount();
-        questionEditText.setText(wordCount);
+        answerTextView.setText(wordCount + " words");
     }
 
 }
