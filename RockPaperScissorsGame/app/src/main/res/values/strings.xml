@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Rock Paper Scissors Game</string>
+    <string name="show_result">This is the Result</string>
+
+
 </resources>
