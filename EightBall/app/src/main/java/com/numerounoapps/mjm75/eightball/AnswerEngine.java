@@ -7,10 +7,10 @@ import java.util.Collections;
  * Created by allymcgilloway on 12/12/2017.
  */
 
-public class Answer {
+public class AnswerEngine {
     ArrayList<String> answers;
 
-    public Answer(){
+    public AnswerEngine(){
         setUpAnswers();
     }
 

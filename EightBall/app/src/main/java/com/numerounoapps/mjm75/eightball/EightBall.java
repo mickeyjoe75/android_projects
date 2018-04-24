@@ -8,9 +8,9 @@ import java.util.Collections;
  */
 
 public class EightBall {
-    Answer answers;
+    AnswerEngine answers;
 
-    public EightBall(Answer answers){
+    public EightBall(AnswerEngine answers){
         this.answers = answers;
     }
 
