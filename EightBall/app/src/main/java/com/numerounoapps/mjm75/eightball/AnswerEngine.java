@@ -11,6 +11,7 @@ public class AnswerEngine {
     ArrayList<String> answers;
 
     public AnswerEngine(){
+
         setUpAnswers();
     }
 
@@ -22,6 +23,7 @@ public class AnswerEngine {
     }
 
     public ArrayList<String> getAnswers(){
+
         return new ArrayList<>(this.answers);
     }
 

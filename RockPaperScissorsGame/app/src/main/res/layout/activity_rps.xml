@@ -11,23 +11,31 @@
         android:layout_width="100dp"
         android:layout_height="55dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
         android:onClick="onScissorsButtonIDClicked"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="?android:attr/actionModeCutDrawable"
-        tools:layout_editor_absoluteY="48dp" />
+        app:layout_constraintStart_toEndOf="@+id/paperButtonID"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?android:attr/actionModeCutDrawable" />
 
     <ImageButton
         android:id="@+id/paperButtonID"
         android:layout_width="100dp"
         android:layout_height="55dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
         android:onClick="onPaperButtonIDClicked"
         app:layout_constraintEnd_toStartOf="@+id/scissorsButtonID"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:srcCompat="?android:attr/actionModePasteDrawable"
-        tools:layout_editor_absoluteY="48dp" />
+        app:layout_constraintStart_toEndOf="@+id/rockButtonID"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?android:attr/actionModePasteDrawable" />
 
     <TextView
         android:id="@+id/resultTextViewID"
@@ -50,9 +58,15 @@
         android:id="@+id/rockButtonID"
         android:layout_width="100dp"
         android:layout_height="55dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
         android:onClick="onRockButtonIDClicked"
-        app:srcCompat="@android:drawable/ic_menu_gallery"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="48dp" />
+        app:layout_constraintEnd_toStartOf="@+id/paperButtonID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
 
 </android.support.constraint.ConstraintLayout>

@@ -22,7 +22,7 @@ public class RPSActivity extends AppCompatActivity {
         paperButton = findViewById(R.id.paperButtonID);
         scissorsButton = findViewById(R.id.scissorsButtonID);
         resultTextView = findViewById(R.id.resultTextViewID);
-        resultTextView.setText("Result");
+        resultTextView.setText("Result....");
     }
 
     public void  onRockButtonIDClicked(View imageButton){
