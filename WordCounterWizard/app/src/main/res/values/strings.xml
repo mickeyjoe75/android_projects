@@ -6,4 +6,5 @@
     <string name="ans_btn">Get word count</string>
     <string name="ent_txt">Enter your text here..</string>
     <string name="ans_txt">Answer..</string>
+    <string name="ans_title">Answer Activity Title</string>
 </resources>

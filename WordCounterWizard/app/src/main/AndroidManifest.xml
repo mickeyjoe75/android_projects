@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AnswerActivity"
+            android:label="@string/ans_title"
+            android:parentActivityName=".WordCounterMainActivity">
+        </activity>
     </application>
 
 </manifest>

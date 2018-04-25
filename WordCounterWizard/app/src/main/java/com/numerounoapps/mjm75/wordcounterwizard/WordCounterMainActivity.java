@@ -1,5 +1,6 @@
 package com.numerounoapps.mjm75.wordcounterwizard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,7 +14,7 @@ public class WordCounterMainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     private EditText questionEditText;
-    private TextView answerTextView;
+
 
 
 
@@ -42,7 +43,7 @@ public class WordCounterMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_counter_main);
         questionEditText = findViewById(R.id.questionEditText);
-        answerTextView  = findViewById(R.id.answerTextView);
+
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -53,7 +54,15 @@ public class WordCounterMainActivity extends AppCompatActivity {
         String words = questionEditText.getText().toString();
         WordCounter wordCounter = new WordCounter(words);
         int  wordCount = wordCounter.getWordCount();
-        answerTextView.setText(wordCount + " words");
+
+        Intent intent = new Intent(this, AnswerActivity.class);
+
+        startActivity(intent);
+
+
+
+
+//        answerTextView.setText(wordCount + " words");
     }
 
 }
