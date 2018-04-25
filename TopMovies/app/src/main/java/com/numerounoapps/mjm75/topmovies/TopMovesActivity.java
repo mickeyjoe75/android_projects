@@ -1,5 +1,6 @@
 package com.numerounoapps.mjm75.topmovies;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,5 +36,10 @@ public class TopMovesActivity extends AppCompatActivity {
     public void onListItmeClick(View listItem) {
         Movie movie = (Movie) listItem.getTag();
         Log.d("Movie Title: ", movie.getTitle());
+
+        Intent intent = new Intent(this, MovieDetailActivity.class);
+        intent.putExtra("movie", movie);
+        startActivity(intent);
+
     }
 }
