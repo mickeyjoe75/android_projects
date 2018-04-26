@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MenuTest App</string>
+    <string name="say_hello">hello</string>
+    <string name="menu_toast_hello">Abracadaba..................</string>
+</resources>
