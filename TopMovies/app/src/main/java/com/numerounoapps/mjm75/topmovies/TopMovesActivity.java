@@ -33,11 +33,11 @@ public class TopMovesActivity extends AppCompatActivity {
 
     }
 
-    public void onListItmeClick(View listItem) {
+    public void onListItemClick(View listItem) {
         Movie movie = (Movie) listItem.getTag();
         Log.d("Movie Title: ", movie.getTitle());
 
-        Intent intent = new Intent(this, MovieDetailActivity.class);
+        Intent intent = new Intent(this, FavouritesActivity.class);
         intent.putExtra("movie", movie);
         startActivity(intent);
 
