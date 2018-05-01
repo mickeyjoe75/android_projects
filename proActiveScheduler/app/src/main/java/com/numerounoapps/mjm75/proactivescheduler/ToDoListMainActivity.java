@@ -2,6 +2,7 @@ package com.numerounoapps.mjm75.proactivescheduler;
 
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -193,4 +195,43 @@ public class ToDoListMainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void updateTodoList() {
+        toDoListSQLHelper = new ToDoListSQLHelper(ToDoListMainActivity.this);
+        SQLiteDatabase sqLiteDatabase = toDoListSQLHelper.getReadableDatabase();
+
+        //cursor to read todo task list from database
+        Cursor cursor = sqLiteDatabase.query(ToDoListSQLHelper.TABLE_NAME,
+                new String[]{ToDoListSQLHelper._ID, ToDoListSQLHelper.COL1_TASK},
+                null, null, null, null, null);
+
+        //binds the todo task list with the UI
+        toDoListAdapter = new SimpleCursorAdapter(
+                this,
+                R.layout.listitem,
+                cursor,
+                new String[]{ToDoListSQLHelper.COL1_TASK},
+                new int[]{R.id.due_text_view},
+                0
+        );
+
+        myList.setAdapter(toDoListAdapter);
+    }
+
+    //closing the todo task item
+    public void onDoneButtonClick(View view) {
+        View v = (View) view.getParent();
+        TextView todoTV = (TextView) v.findViewById(R.id.due_text_view);
+        String todoTaskItem = todoTV.getText().toString();
+
+        String deleteTodoItemSql = "DELETE FROM " + ToDoListSQLHelper.TABLE_NAME +
+                " WHERE " + ToDoListSQLHelper.COL1_TASK + " = '" + todoTaskItem + "'";
+
+        toDoListSQLHelper = new ToDoListSQLHelper(ToDoListMainActivity.this);
+        SQLiteDatabase sqlDB = toDoListSQLHelper.getWritableDatabase();
+        sqlDB.execSQL(deleteTodoItemSql);
+        updateTodoList();
+        sqlDB.close();
+    }
+
 }

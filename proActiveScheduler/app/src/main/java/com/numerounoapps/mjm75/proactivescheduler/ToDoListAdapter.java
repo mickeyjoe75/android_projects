@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class ToDoListAdapter extends BaseAdapter {
     private ArrayList<String> mListItems;
     private LayoutInflater mLayoutInflater;
+
     public ToDoListAdapter(Context context, ArrayList<String> arrayList){
         mListItems = arrayList;
         //get the layout inflater
@@ -41,7 +42,7 @@ public class ToDoListAdapter extends BaseAdapter {
         //check to see if the reused view is null or not, if is not null then reuse it
         if (view == null) {
             holder = new ViewHolder();
-            view = mLayoutInflater.inflate(R.layout.due, null);
+            view = mLayoutInflater.inflate(R.layout.listitem, null);
             holder.itemName = (TextView) view.findViewById(R.id.due_text_view);
             holder.imageButton = (ImageButton) view.findViewById(R.id.delete_button);
             // the setTag is used to store the data within this view
