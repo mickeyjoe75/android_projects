@@ -1,5 +1,8 @@
 package com.numerounoapps.mjm75.proactivescheduler;
 
+import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -22,6 +29,9 @@ public class ToDoListMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private TextView date;
+    private ListView myList;
+    private ListAdapter toDoListAdapter;
+    private ToDoListSQLHelper toDoListSQLHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +64,75 @@ public class ToDoListMainActivity extends AppCompatActivity
         date = findViewById(R.id.dateTextId);
         //set it as current date.
         date.setText(date_n);
+
+        myList = (ListView) findViewById(R.id.list);
+        ImageButton fabImageButton = (ImageButton) findViewById(R.id.fab_image_button);
+
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        (ListView) findViewById(R.id.list),
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+
+                                    String deleteTodoItemSql = "DELETE FROM " + ToDoListSQLHelper.TABLE_NAME +
+                                            " WHERE " + ToDoListSQLHelper._ID + " = '" + toDoListAdapter.getItemId(position) + "'";
+
+                                    toDoListSQLHelper = new ToDoListSQLHelper(ToDoListMainActivity.this);
+                                    SQLiteDatabase sqlDB = toDoListSQLHelper.getWritableDatabase();
+                                    sqlDB.execSQL(deleteTodoItemSql);
+                                    updateTodoList();
+
+                                }
+                            }
+
+                        });
+
+        fabImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.add("New Item");
+                adapter.notifyDataSetChanged();
+                AlertDialog.Builder todoTaskBuilder = new AlertDialog.Builder(MainActivity.this);
+                todoTaskBuilder.setTitle("Add a List item.");
+                todoTaskBuilder.setMessage("Describe the item.");
+                final EditText todoET = new EditText(MainActivity.this);
+                todoTaskBuilder.setView(todoET);
+                todoTaskBuilder.setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String todoTaskInput = todoET.getText().toString();
+                        todoListSQLHelper = new TodoListSQLHelper(MainActivity.this);
+                        SQLiteDatabase sqLiteDatabase = todoListSQLHelper.getWritableDatabase();
+                        ContentValues values = new ContentValues();
+                        values.clear();
+
+                        //write the Todo task input into database table
+                        values.put(TodoListSQLHelper.COL1_TASK, todoTaskInput);
+                        sqLiteDatabase.insertWithOnConflict(TodoListSQLHelper.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+
+                        //update the Todo task list UI
+                        updateTodoList();
+                    }
+                });
+
+                todoTaskBuilder.setNegativeButton("Cancel", null);
+
+                todoTaskBuilder.create().show();
+            }
+        });
+
+        //show the ListView on the screen
+        // The adapter MyCustomAdapter is responsible for maintaining the data backing this list and for producing
+        // a view to represent an item in that data set.
+
+        updateTodoList();
 
 
     }
