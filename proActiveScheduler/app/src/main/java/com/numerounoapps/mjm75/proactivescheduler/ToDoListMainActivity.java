@@ -12,9 +12,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ToDoListMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private TextView date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,15 @@ public class ToDoListMainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //create a date string.
+        String date_n = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(new Date());
+        //get hold of textview.
+        date = findViewById(R.id.dateTextId);
+        //set it as current date.
+        date.setText(date_n);
+
+
     }
 
     @Override
