@@ -87,7 +87,7 @@ public class TaskMainActivity extends AppCompatActivity {
             mAdapter.notifyDataSetChanged();
         }
     }
-
+// Adding the popup menu and add item options.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);
