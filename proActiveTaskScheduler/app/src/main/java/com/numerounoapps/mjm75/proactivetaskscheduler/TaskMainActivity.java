@@ -34,37 +34,32 @@ public class TaskMainActivity extends AppCompatActivity {
     ListView lstTask;
 
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_homeId:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_taskDetailId:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.calendarViewId:
-                    mTextMessage.setText(R.string.title_calenderview);
-                    return true;
-            }
-            return false;
-        }
-    };
+//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+//
+//        @Override
+//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//            switch (item.getItemId()) {
+//                case R.id.navigation_homeId:
+//                    mTextMessage.setText(R.string.title_home);
+//                    return true;
+//                case R.id.navigation_taskDetailId:
+//                    mTextMessage.setText(R.string.title_dashboard);
+//                    return true;
+//                case R.id.calendarViewId:
+//                    mTextMessage.setText(R.string.title_calenderview);
+//                    return true;
+//            }
+//            return false;
+//        }
+//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_main);
 
-//        mTextMessage = (TextView) findViewById(R.id.message);
-//        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationId);
-//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-// these methods are for the bottom navigation bar and links to the views.
-
+        /* these methods are for the bottom navigation bar and links to the views. */
 
         BottomNavigationView bottomNav = findViewById(R.id.navigationId);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -76,10 +71,10 @@ public class TaskMainActivity extends AppCompatActivity {
                     new HomeFragment()).commit();
         }
 
-
-
-        //For setting the current date at the header view on Home Screen
-        //create a date string.
+        /*
+        For setting the current date at the header view on Home Screen
+        create a date string.
+        */
         String date_n = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(new Date());
         //get hold of textview.
         date = findViewById(R.id.dateTextId);
@@ -135,7 +130,8 @@ public class TaskMainActivity extends AppCompatActivity {
         }
     }
 
-    // Adding the popup menu and add item options.
+    /* Adding the popup menu and add item options. */
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);

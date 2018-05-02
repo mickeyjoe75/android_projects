@@ -19,6 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".CalenderViewActivity"></activity>
+        <activity android:name=".HomeFragment"></activity>
+        <activity android:name=".CalendarViewFragment"></activity>
+        <activity android:name=".TaskDetailFragment"></activity>
     </application>
 
 </manifest>
