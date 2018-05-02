@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">pro Active Task Scheduler</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="heading_home_text">Focus Today:</string>
+    <string name="dateTextId">dateTextId</string>
+</resources>
