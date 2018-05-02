@@ -12,22 +12,13 @@ import android.widget.TextView;
 
 public class CalenderViewActivity extends AppCompatActivity {
 
-    private CalendarView calenderView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender_view);
 
-        calenderView = findViewById(R.id.calendarViewId);
-
     }
 
-    public void onClickCalendar(View MenuItem) {
-
-        calenderView.getWeekDayTextAppearance();
-
-    }
 
 }

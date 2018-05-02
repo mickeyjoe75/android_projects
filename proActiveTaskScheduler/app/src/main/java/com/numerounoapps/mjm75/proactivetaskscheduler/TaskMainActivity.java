@@ -16,10 +16,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
+import android.support.v4.app.Fragment;
+
 
 public class TaskMainActivity extends AppCompatActivity {
 
@@ -36,7 +40,7 @@ public class TaskMainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_homeId:
                     mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_taskDetailId:
@@ -55,11 +59,26 @@ public class TaskMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//        mTextMessage = (TextView) findViewById(R.id.message);
+//        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationId);
+//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+// these methods are for the bottom navigation bar and links to the views.
 
 
+        BottomNavigationView bottomNav = findViewById(R.id.navigationId);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+
+
+        //I added this if statement to keep the selected fragment when rotating the device
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomeFragment()).commit();
+        }
+
+
+
+        //For setting the current date at the header view on Home Screen
         //create a date string.
         String date_n = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(new Date());
         //get hold of textview.
@@ -67,30 +86,59 @@ public class TaskMainActivity extends AppCompatActivity {
         //set it as current date.
         date.setText(date_n);
 
-        sqlDbHelper = new SqlDbHelper(this);
+        sqlDbHelper = new
 
-        lstTask = (ListView)findViewById(R.id.listTaskId);
+                SqlDbHelper(this);
+
+        lstTask = (ListView)
+
+                findViewById(R.id.listTaskId);
 
         loadTaskList();
 
     }
 
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
+
+                    switch (item.getItemId()) {
+                        case R.id.navigation_homeId:
+                            selectedFragment = new HomeFragment();
+                            break;
+                        case R.id.navigation_taskDetailId:
+                            selectedFragment = new TaskDetailFragment();
+                            break;
+                        case R.id.navigation_calenderViewId:
+                            selectedFragment = new CalendarViewFragment();
+                            break;
+                    }
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            selectedFragment).commit();
+
+                    return true;
+                }
+            };
+
     private void loadTaskList() {
         ArrayList<String> taskList = sqlDbHelper.getTaskList();
-        if(mAdapter==null){
-            mAdapter = new ArrayAdapter<String>(this,R.layout.row,R.id.taskTitleId,taskList);
+        if (mAdapter == null) {
+            mAdapter = new ArrayAdapter<String>(this, R.layout.row, R.id.taskTitleId, taskList);
             lstTask.setAdapter(mAdapter);
-        }
-        else{
+        } else {
             mAdapter.clear();
             mAdapter.addAll(taskList);
             mAdapter.notifyDataSetChanged();
         }
     }
-// Adding the popup menu and add item options.
+
+    // Adding the popup menu and add item options.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
 
         //Change menu icon color
         Drawable icon = menu.getItem(0).getIcon();
@@ -102,7 +150,7 @@ public class TaskMainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_add_task:
                 final EditText taskEditText = new EditText(this);
                 AlertDialog dialog = new AlertDialog.Builder(this)
@@ -117,7 +165,7 @@ public class TaskMainActivity extends AppCompatActivity {
                                 loadTaskList();
                             }
                         })
-                        .setNegativeButton("Cancel",null)
+                        .setNegativeButton("Cancel", null)
                         .create();
                 dialog.show();
                 return true;
@@ -125,9 +173,9 @@ public class TaskMainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void deleteTask(View view){
-        View parent = (View)view.getParent();
-        TextView taskTextView = (TextView)parent.findViewById(R.id.taskTitleId);
+    public void deleteTask(View view) {
+        View parent = (View) view.getParent();
+        TextView taskTextView = (TextView) parent.findViewById(R.id.taskTitleId);
         Log.e("String", (String) taskTextView.getText());
         String task = String.valueOf(taskTextView.getText());
         sqlDbHelper.deleteTask(task);
