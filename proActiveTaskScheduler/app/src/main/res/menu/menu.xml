@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_add_task"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="Add New Task"
-        app:showAsAction="always"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:actionLayout="@style/Widget.Design.FloatingActionButton"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="@string/add_new_task1"
+        app:showAsAction="always" />
 </menu>
