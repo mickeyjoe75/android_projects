@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">ProActive Scheduler2</string>
+    <string name="add_a_new_task">Add a new Task</string>
+    <string name="enter_task_name">Enter Task Name</string>
+    <string name="select_priority">Select Priority</string>
+    <string name="enter_task_date">Enter Task Date</string>
+    <string name="add_task">Add Task</string>
+    <string name="view_tasks">View Tasks</string>
+    <string name="task_name">Task Name</string>
+    <string name="task_priority">Priority</string>
+    <string name="task_date">Task Date</string>
+    <string name="delete">Done!</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="update">Update</string>
+
+    <array name="priority">
+        <item>P1-ImportantAndUrgent</item>
+        <item>P2-ImportantButNotUrgent</item>
+        <item>P3-NotImportantButUrgent</item>
+        <item>P4-NotImportantAndNotUrgent</item>
+    </array>
 </resources>
